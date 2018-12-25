@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+    
+    <body id="idbody">
+        <header>
+          <h1>Quiz</h1>
+        </header>              
+      <section>
+
+      </section>        
+                
+        <div>           
+            <button onclick="myFunction1()">Click me</button>
+            <div id="myDIV" class="game-board">
+        </div>        
+        <script>  
+             function myFunction() {
+                 var x = document.getElementById("myDIV");
+                 x.appendChild(node);
+             }
+             
+             function myFunction1() {
+                var para = document.createElement("box");
+                para.className = "box";
+                var t = document.createTextNode("This is a div and text node");
+                para.appendChild(t);
+                document.getElementById("myDIV").appendChild(para);
+                    var element = document.getElementById("myDIV");
+                    var numberOfChildren = element.getElementsByTagName('*').length ;              
+            }
+        </script>
+        
+
+        
+          
+        </div>
+                <script>
+                var currentRecord=0;
+                var lastRecord=0;
+                var header = document.querySelector('header');
+                var section = document.querySelector('section');
+                var requestURL ='https://oglejsi2.github.io/quiz_1.json';    
+                var request = new XMLHttpRequest();
+                request.open('GET', requestURL);
+                request.responseType = 'json';
+                request.send();
+                request.onload = function() {
+                  var superHeroes = request.response;
+                  populateHeader(superHeroes);   
+                  showQuestions(superHeroes);
+                }
+                function populateHeader(jsonObj) {
+                  var myH1 = document.createElement('h2');
+                  myH1.textContent = jsonObj['quizName'];
+                  header.appendChild(myH1);
+                }
+
+            /*
+             *   "questionsAnswers": [
+                { "question":"my first question","answer":"my first answer"},
+                    { "question":"my secondion","answer":"my second answer"},
+              ]
+             */
+
+                function createButton(jsonObj) {
+                  var btn = document.createElement("BUTTON");      
+                  btn.innerHTML = 'Next record';
+                    btn.onclick = function(){
+                        currentRecord=currentRecord+1;
+                        var myPara3 = document.createElement('p');
+                        var questionsAnswers = jsonObj['questionsAnswers'];
+                        myPara3.textContent = 'Question ' + questionsAnswers[currentRecord].question;
+                        section.appendChild(myPara3);  
+                        createTextNode();
+                      return false;
+                    };
+                  section.appendChild(btn);
+                }
+
+                function showQuestions(jsonObj) {
+                  var questionsAnswers = jsonObj['questionsAnswers'];
+                  for(var i = 0; i < questionsAnswers.length; i++) {
+                      lastRecord=i;
+                  }
+                  var myPara3 = document.createElement('p');
+                  myPara3.textContent = 'Question ' + questionsAnswers[0].question;
+                  section.appendChild(myPara3);
+                  createButton(jsonObj);
+                  currentRecord=0;
+                }
+                
+                function createTextNode() {
+                    var section = document.querySelector('section');
+                    //Create an input type dynamically.
+                    var element = document.createElement("input");
+
+                    //Create Labels
+                    var label = document.createElement("Label");
+                    label.innerHTML = "New Label";     
+
+                    //Assign different attributes to the element.
+                    element.setAttribute("type", "text");
+                    element.setAttribute("value", "");
+                    element.setAttribute("name", "Test Name");
+                    element.setAttribute("style", "width:200px");
+
+                    label.setAttribute("style", "font-weight:normal");
+
+                    // 'foobar' is the div id, where new fields are to be added
+
+                    //Append the element in page (in span).
+                    section.appendChild(label);
+                    section.appendChild(element);
+                }
+
+                </script>         
+    </body>
+    
+</html>
