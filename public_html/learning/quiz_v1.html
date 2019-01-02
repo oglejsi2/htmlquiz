@@ -9,38 +9,18 @@
     
     <body id="idbody">
         <header>
-          <h1>Quiz</h1>
-        </header>              
+          <h1></h1>
+        </header>
+        
       <section>
 
-      </section>        
-                
-        <div>           
-            <button onclick="myFunction1()">Click me</button>
-            <div id="myDIV" class="game-board">
-        </div>        
-        <script>  
-             function myFunction() {
-                 var x = document.getElementById("myDIV");
-                 x.appendChild(node);
-             }
-             
-             function myFunction1() {
-                var para = document.createElement("box");
-                para.className = "box";
-                var t = document.createTextNode("This is a div and text node");
-                para.appendChild(t);
-                document.getElementById("myDIV").appendChild(para);
-                    var element = document.getElementById("myDIV");
-                    var numberOfChildren = element.getElementsByTagName('*').length ;              
-            }
-        </script>
+      </section>   
         
+        
+      <img src="https://drive.google.com/uc?id=1-1PNoShB7P92uf7_By1DG1hzNT1cWJtF" alt="Just a picture">
+      
 
-        
-          
-        </div>
-                <script>
+        <script>
                 var currentRecord=0;
                 var lastRecord=0;
                 var header = document.querySelector('header');
@@ -55,6 +35,7 @@
                   populateHeader(superHeroes);   
                   showQuestions(superHeroes);
                 }
+                
                 function populateHeader(jsonObj) {
                   var myH1 = document.createElement('h2');
                   myH1.textContent = jsonObj['quizName'];
@@ -72,54 +53,49 @@
                   var btn = document.createElement("BUTTON");      
                   btn.innerHTML = 'Next record';
                     btn.onclick = function(){
+                        var answerToRemove = document.getElementById("ans"+currentRecord);
+                        var questionToRemove = document.getElementById("question"+currentRecord);
+                        section.removeChild(questionToRemove);
+                        section.removeChild(answerToRemove);
                         currentRecord=currentRecord+1;
-                        var myPara3 = document.createElement('p');
+                        var questionHtml = document.createElement('p');
                         var questionsAnswers = jsonObj['questionsAnswers'];
-                        myPara3.textContent = 'Question ' + questionsAnswers[currentRecord].question;
-                        section.appendChild(myPara3);  
-                        createTextNode();
+                        questionHtml.textContent = 'Question ' + questionsAnswers[currentRecord].question;      
+                        questionHtml.setAttribute("id","question"+currentRecord);
+                        section.appendChild(questionHtml);  
+                        createAnswerText(currentRecord);
+                        document.getElementById("ans"+currentRecord).focus();
                       return false;
                     };
                   section.appendChild(btn);
                 }
 
+                function createAnswerText(i) {
+                  var x = document.createElement("INPUT");
+                  x.setAttribute("type", "text");
+                  x.setAttribute("placeholder", "your answer");
+                  x.setAttribute("id","ans"+i);
+                  section.appendChild(x);
+                }
+                
                 function showQuestions(jsonObj) {
+                  var br = document.createElement("br");
+                  var questionParag = document.createElement('p');
                   var questionsAnswers = jsonObj['questionsAnswers'];
                   for(var i = 0; i < questionsAnswers.length; i++) {
                       lastRecord=i;
-                  }
-                  var myPara3 = document.createElement('p');
-                  myPara3.textContent = 'Question ' + questionsAnswers[0].question;
-                  section.appendChild(myPara3);
-                  createButton(jsonObj);
+                  }  
                   currentRecord=0;
+                  questionParag.textContent = questionsAnswers[0].question;
+                  questionParag.setAttribute("id","question"+currentRecord);
+                  section.appendChild(questionParag);        
+                  createAnswerText(0);
+                  section.appendChild(br);
+                  createButton(jsonObj);                                  
+                  document.getElementById("ans"+currentRecord).focus();
+                  
                 }
-                
-                function createTextNode() {
-                    var section = document.querySelector('section');
-                    //Create an input type dynamically.
-                    var element = document.createElement("input");
-
-                    //Create Labels
-                    var label = document.createElement("Label");
-                    label.innerHTML = "New Label";     
-
-                    //Assign different attributes to the element.
-                    element.setAttribute("type", "text");
-                    element.setAttribute("value", "");
-                    element.setAttribute("name", "Test Name");
-                    element.setAttribute("style", "width:200px");
-
-                    label.setAttribute("style", "font-weight:normal");
-
-                    // 'foobar' is the div id, where new fields are to be added
-
-                    //Append the element in page (in span).
-                    section.appendChild(label);
-                    section.appendChild(element);
-                }
-
-                </script>         
+         </script>         
     </body>
     
 </html>

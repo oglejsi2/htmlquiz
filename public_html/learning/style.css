@@ -9,12 +9,52 @@ and open the template in the editor.
 */
 
 
+form {
+    
+}
 
 header {
-  background-color: background;  
+  background-color: #0066cc;  
   text-align: center;
   font-size: 35px;
-  color: white;
+  color: #c4fffb;
   height: 15%;
   width: 100%;
 }
+
+p {
+    background-color: #c4fffb; 
+    font-size: 35px;
+    color: royalblue;
+}
+
+form {
+    background-color: #c4fffb;  
+    text-align: center;
+}
+
+input[type='radio'] {
+   text-align: left; 
+   color: royalblue;
+}
+
+button {
+    color: royalblue;
+    background-color: #c4fffb;
+    font-size: 35px;
+    text-align: center;
+}
+
+input[type='text'] {
+    font-size: 24px; 
+    font-family: monospace; 
+    background-color:#0099ff;
+    width: 100%
+    }
+    
+input[type='submit'] {
+    font-size: 24px; 
+    font-family: monospace; 
+    background-color:#0099ff;
+    width: 100%
+    }    

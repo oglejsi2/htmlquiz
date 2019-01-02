@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body id="body1">
+
+<p>Click the button to create a Radio Button.</p>
+<button onclick="myFunction()">Try it</button>
+<button onclick="brisi()">Delete</button>
+
+
+
+<script>
+function brisi() {
+	    while (document.getElementsByClassName('gender')[0]) {
+                document.getElementsByClassName('gender')[0].remove();
+            }
+}
+
+function myFunction() {
+  var x = document.createElement("INPUT");
+  var labelX = document.createElement("LABEL");
+  var textNode = document.createTextNode("x value label");
+  labelX.setAttribute("for", "x value");
+  labelX.setAttribute("class", "gender");
+  labelX.appendChild(textNode);
+
+  x.setAttribute("type", "radio"); 
+  x.setAttribute("name", "gender");
+  x.setAttribute("class", "gender");
+  x.setAttribute("id", "gender1");
+  x.setAttribute("value", "x value");
+  x.onclick=function() {
+      alert(this.value);
+  };
+
+  document.body.appendChild(x);
+  
+  document.getElementById("body1").insertBefore(labelX,document.getElementById("gender1"));
+}
+
+</script>
+
+</body>
+</html>
